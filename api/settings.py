@@ -108,10 +108,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DATABASES = {}
-print("Mongo DB Name:", os.getenv('MONGO_DBNAME'))
-print("Mongo Host:", os.getenv('MONGO_DBHOST'))
-
 connect(
     db = os.getenv('MONGO_DBNAME'),
     host = os.getenv('MONGO_DBHOST')

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Inventory
+from .models import Inventory, InventoryTransfer
 
 class InventorySerializer(serializers.Serializer):
     id = serializers.CharField(read_only = True)
