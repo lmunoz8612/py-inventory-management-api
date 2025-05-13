@@ -47,8 +47,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-DATABASES = {}
-
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [
@@ -109,6 +107,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATABASES = {}
+print("Mongo DB Name:", os.getenv('MONGO_DBNAME'))
+print("Mongo Host:", os.getenv('MONGO_DBHOST'))
 
 connect(
     db = os.getenv('MONGO_DBNAME'),
