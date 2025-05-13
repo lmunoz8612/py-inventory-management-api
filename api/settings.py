@@ -1,5 +1,9 @@
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 from mongoengine import connect
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -105,6 +109,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 connect(
-    db = 'retail-inventory',
-    host = 'mongodb+srv://lvmunozf:gHP9DuUqYGvOPfbA@retail-inventory.dyjojik.mongodb.net/?retryWrites=true&w=majority&appName=retail-inventory'
+    db = os.getenv('MONGO_DBNAME'),
+    host = os.getenv('MONGO_DBHOST')
 )

@@ -13,6 +13,8 @@ services:
       - MONGO_URI=mongodb://mongo:27017/mi_db
     depends_on:
       - mongo
+    env_file:
+      - .env
 
   mongo:
     image: mongo
