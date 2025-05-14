@@ -39,4 +39,4 @@ Swagger (drf_yasg): Para exponer documentación dinámica de los endpoints.
 Estructura modular: Se organizaron las apps por contexto (products, inventory, stores), facilitando el mantenimiento.
 
 ### 4. Despliegue en AWS
-Ver: aws_deployment.md
+Ver: AWS_DEPLOYMENT_README.md
