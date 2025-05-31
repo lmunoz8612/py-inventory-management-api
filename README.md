@@ -40,3 +40,6 @@ Estructura modular: Se organizaron las apps por contexto (products, inventory, s
 
 ### 4. Despliegue en AWS
 Ver: AWS_DEPLOYMENT_README.md
+
+### 5. Pruebas
+Ver: postman/postman_collection.json
