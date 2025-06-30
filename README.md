@@ -20,12 +20,12 @@ cd py-inventory-management-api
 ```
 
 ### 2. Endpoints principales:
-Método	Endpoint	                  Descripción
-GET	    /api/inventory/	            Listar inventario
-POST	  /api/inventory/	            Registrar nuevo inventario
-GET	    /api/inventory-transfers/	  Listar transferencias
-POST	  /api/inventory-transfers/	  Registrar transferencia entre almacenes
-GET	    /api/inventory-alerts/	    Ver productos con stock bajo
+|Método|Endpoint|Descripción|
+|GET|/api/inventory/|Listar inventario|
+|POST|/api/inventory/|Registrar nuevo inventario|
+|GET|/api/inventory-transfers/|Listar transferencias|
+|POST|/api/inventory-transfers/|Registrar transferencia entre almacenes|
+|GET|/api/inventory-alerts/|Ver productos con stock bajo|
 
 Documentación completa:
 - http://[host]:8000/docs/
