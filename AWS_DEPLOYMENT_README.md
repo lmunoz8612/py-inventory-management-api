@@ -14,10 +14,10 @@
 ##### 3.- newgrp docker
 
 ## Clonar repositorio github:
-##### 1.- https://github.com/lmunoz8612/tm-consulting.git
+##### 1.- https://github.com/lmunoz8612/py-inventory-management-api.git
 
 ## Levantamiento de aplicación (en terminal):
-##### 1.- cd tm-consulting
+##### 1.- cd py-inventory-management-api
 ##### 2.- sudo docker-compose up -d --build
 ##### 3.- Verificar si esta funcionando la aplicación:
     - sudo systemctl status docker (En caso contrario: sudo systemctl start docker)
