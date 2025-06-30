@@ -15,16 +15,16 @@ Esta es una API REST construida con **Django REST Framework** y **MongoDB** (ví
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/lmunoz8612/tm-consulting.git
-cd tm-consulting
+git clone https://github.com/lmunoz8612/py-inventory-management-api.git
+cd py-inventory-management-api
 ```
 
 ### 2. Endpoints principales:
 Método	Endpoint	                Descripción
 GET	    /api/inventory/	            Listar inventario
-POST	/api/inventory/	            Registrar nuevo inventario
-GET	    /api/inventory-transfers/	Listar transferencias
-POST	/api/inventory-transfers/	Registrar transferencia entre almacenes
+POST	  /api/inventory/	            Registrar nuevo inventario
+GET	    /api/inventory-transfers/	  Listar transferencias
+POST	  /api/inventory-transfers/	  Registrar transferencia entre almacenes
 GET	    /api/inventory-alerts/	    Ver productos con stock bajo
 
 Documentación completa:
