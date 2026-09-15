@@ -31,8 +31,8 @@ python manage.py runserver
 | GET  | /api/inventory/alerts/   | Ver productos con stock bajo            |
 
 Documentación completa:
-- http://[host]:8000/docs/
-- http://[host]:8000/docs.json/
+- http(s)://[host]:8000/docs/
+- http(s)://[host]:8000/docs.json/
 
 ### 3. Decisiones técnicas
 - Base de datos: Se utilizó MongoDB por su flexibilidad de esquema y velocidad en operaciones con documentos.
