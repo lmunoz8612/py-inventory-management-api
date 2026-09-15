@@ -17,6 +17,7 @@ Esta es una API REST construida con **Django REST Framework** y **MongoDB** (ví
 ```bash
 git clone https://github.com/lmunoz8612/py-inventory-management-api.git
 cd py-inventory-management-api
+python -m pip install pymongo
 python manage.py runserver
 ```
 
