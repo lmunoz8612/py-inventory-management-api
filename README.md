@@ -21,9 +21,12 @@ python -m pip install pymongo
 python manage.py runserver
 ```
 ### 1.1. Agregar archivo .env
-Agregar .env en la raíz del proyecto:
+Agregar `.env` en la raíz del proyecto:
+
+```ini
 MONGO_DBNAME=retail-inventory
 MONGO_DBHOST=mongodb+srv://{USER}:{PASSWORD}@retail-inventory.dyjojik.mongodb.net/?retryWrites=true&w=majority&appName=retail-inventory
+```
 
 ### 2. Endpoints principales:
 |Método|Endpoint       |Descripción                                         |
