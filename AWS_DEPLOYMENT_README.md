@@ -13,7 +13,7 @@
 ##### 2.- sudo usermod -aG docker $USER
 ##### 3.- newgrp docker
 
-## Clonar repositorio github:
+## Instalar Git y clonar repositorio github:
 ##### 1.- https://github.com/lmunoz8612/py-inventory-management-api.git
 
 ## Levantamiento de aplicación (en terminal):
