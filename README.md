@@ -19,6 +19,10 @@ git clone https://github.com/lmunoz8612/py-inventory-management-api.git
 cd py-inventory-management-api
 python -m pip install pymongo
 python manage.py runserver
+
+Agregar .env en la raíz del proyecto:
+MONGO_DBNAME=retail-inventory
+MONGO_DBHOST=mongodb+srv://{USER}:{PASSWORD}@retail-inventory.dyjojik.mongodb.net/?retryWrites=true&w=majority&appName=retail-inventory
 ```
 
 ### 2. Endpoints principales:
