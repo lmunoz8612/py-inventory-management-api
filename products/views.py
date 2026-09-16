@@ -87,4 +87,4 @@ class ProductViewSet(viewsets.ViewSet):
             return Response({'error': 'Product not found.'}, status = status.HTTP_404_NOT_FOUND)
 
         product.delete()
-        return Response({'message': 'Product successfully deleted.'}, status = status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Product successfully deleted.'}, status = status.HTTP_200_OK)
