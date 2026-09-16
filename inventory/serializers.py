@@ -11,7 +11,7 @@ class InventorySerializer(serializers.Serializer):
     def validate_productId(self, value):
         query = Product.objects.filter(id=value)
 
-        # Evalúa si la consulta no devolvió al menos un elemento .exists()
+        # Evalúa si la consulta no devolvió al menos un elemento
         if query.count() == 0:
             raise serializers.ValidationError({
                 "detail": "Product with ID {0} does not exist." . format(value),
