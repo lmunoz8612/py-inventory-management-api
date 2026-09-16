@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 from .models import Product
+from inventory.models import Inventory
 from .serializers import ProductSerializer
 
 class ProductViewSet(viewsets.ViewSet):
@@ -86,5 +87,9 @@ class ProductViewSet(viewsets.ViewSet):
         except Product.DoesNotExist:
             return Response({'error': 'Product not found.'}, status = status.HTTP_404_NOT_FOUND)
 
+        # Validar si el producto no existe en inventario, de lo contrario, devolver un error.
+        inventoryEntry = Inventory.objects.filter(productId = str(product.id)).first()
+        if inventoryEntry:
+            return Response({ 'error' : 'Product exists in inventory and cannot be deleted.' }, status = status.HTTP_409_CONFLICT)
         product.delete()
         return Response({'message': 'Product successfully deleted.'}, status = status.HTTP_200_OK)
