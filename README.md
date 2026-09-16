@@ -36,6 +36,7 @@ MONGO_DBHOST=mongodb+srv://{USER}:{PASSWORD}@retail-inventory.dyjojik.mongodb.ne
 ```bash
 python -m pip install -r requirements.txt
 ```
+* requirements-dev.txt
 
 ### 4. Ejecutar el servidor
 ```bash
