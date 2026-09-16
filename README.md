@@ -12,23 +12,37 @@ Esta es una API REST construida con **Django REST Framework** y **MongoDB** (ví
 - MongoDB (local o remoto)
 - `pip` para gestionar paquetes
 
-### 1. Clonar el repositorio
+### 1. Clonar el repositorio y preparar el entorno
 
 ```bash
 git clone https://github.com/lmunoz8612/py-inventory-management-api.git
 cd py-inventory-management-api
-python -m pip install pymongo
-python manage.py runserver
-```
-### 1.1. Agregar archivo .env
-Agregar `.env` en la raíz del proyecto:
 
-```ini
+# Crear y activar entorno virtual
+python -m venv venv
+# En Windows:
+venv\Scripts\activate
+# En Linux/Mac:
+source venv/bin/activate
+```
+### 2. Configurar variables de entorno
+Crear un archivo .env en la raíz del proyecto antes de instalar o ejecutar:
+```bash
 MONGO_DBNAME=retail-inventory
 MONGO_DBHOST=mongodb+srv://{USER}:{PASSWORD}@retail-inventory.dyjojik.mongodb.net/?retryWrites=true&w=majority&appName=retail-inventory
 ```
 
-### 2. Endpoints principales:
+### 3. Instalar dependencias
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 4. Ejecutar el servidor
+```bash
+python manage.py runserver
+```
+
+### 5. Endpoints principales:
 |Método|Endpoint       |Descripción                                         |
 |------|---------------|----------------------------------------------------|
 | GET  | /api/inventory/          | Listar inventario                       |
@@ -41,15 +55,15 @@ Documentación completa:
 - http(s)://[host]:8000/docs/
 - http(s)://[host]:8000/docs.json/
 
-### 3. Decisiones técnicas
+### 6. Decisiones técnicas
 - Base de datos: Se utilizó MongoDB por su flexibilidad de esquema y velocidad en operaciones con documentos.
 - ODM: Se usó mongoengine para definir modelos de datos de forma declarativa y legible.
 - Framework: Django REST Framework facilita la creación de APIs robustas con validación, serialización y documentación automática.
 - Swagger (drf_yasg): Para exponer documentación dinámica de los endpoints.
 - Estructura modular: Se organizaron las apps por contexto (products, inventory, stores), facilitando el mantenimiento.
 
-### 4. Despliegue en AWS
+### 7. Despliegue en AWS
 Ver: AWS_DEPLOYMENT_README.md
 
-### 5. Pruebas
+### 8. Pruebas
 Ver: postman/postman_collection.json
