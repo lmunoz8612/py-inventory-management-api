@@ -13,15 +13,15 @@ class ProductSerializer(serializers.Serializer):
 
         # Si es actualización, excluye el objeto actual
         if self.instance:
-            query = query.exclude(pk=self.instance.pk)
+            query = query.filter(id__ne=self.instance.id)
 
-        # Evalúa si la consulta devolvió al menos un elemento sin usar .exists()
+        # Evalúa si la consulta devolvió al menos un elemento .exists()
         if query.count() > 0:
             raise serializers.ValidationError({
                 "detail": "A product with this SKU already exists.",
                 "code": "sku_already_exists"
             })
-
+        
         return value
 
     def create(self, validated_data):

@@ -44,7 +44,6 @@ class InventoryTransfer(Document):
     targetStoreId = StringField(required = True, max_length = 25)
     quantity = IntField(required = True)
     timestamp = timestamp = DateTimeField(required=True, default=datetime.utcnow)
-    type = StringField(required = True, max_length = 50, choices = ['IN', 'OUT', 'TRANSFER'])
     meta = {
         'collection': 'inventory_transfers',
         'indexes': [

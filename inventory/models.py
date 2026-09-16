@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, FloatField, IntField, DateTimeField
+from mongoengine import Document, StringField, IntField, DateTimeField
 from datetime import datetime
 
 class Inventory(Document):
@@ -8,6 +8,12 @@ class Inventory(Document):
     minStock = IntField()
     meta = {
         'collection': 'inventory',
+        'indexes': [
+            {
+                'fields': ['productId', 'storeId'],
+                'unique': True
+            }
+        ]
     }
 
 class InventoryTransfer(Document):
@@ -16,7 +22,6 @@ class InventoryTransfer(Document):
     targetStoreId = StringField(required = True, max_length = 25)
     quantity = IntField(required = True)
     timestamp = timestamp = DateTimeField(required=True, default=datetime.utcnow)
-    type = StringField(required = True, max_length = 50, choices = ['IN', 'OUT', 'TRANSFER'])
     meta = {
         'collection': 'inventory_transfers',
     }
