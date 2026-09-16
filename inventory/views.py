@@ -55,10 +55,16 @@ class InventoryTransferViewSet(viewsets.ViewSet):
             # Validar si hay suficiente cantidad.
             sourceStoreInventory = Inventory.objects.filter(productId = productId, storeId = sourceStoreId).first()
             if not sourceStoreInventory or sourceStoreInventory.quantity < quantity:
-                return Response({ 'error' : 'Insufficient stock in source store.' }, status = status.HTTP_400_BAD_REQUEST)
+                return Response({
+                    'detail' : 'Insufficient stock in source store.',
+                    'code' : 'insufficient_stock'
+                }, status = status.HTTP_400_BAD_REQUEST)
             sourceStoreInventory.quantity -= quantity
             if sourceStoreInventory.quantity < sourceStoreInventory.minStock:
-                return Response({ 'error' : f'Required minimum stock in source store is {sourceStoreInventory.minStock}' }, status = status.HTTP_400_BAD_REQUEST)
+                return Response({
+                    'detail' : f'Required minimum stock in source store is {sourceStoreInventory.minStock}',
+                    'code' : 'minimum_stock_required'
+                }, status = status.HTTP_400_BAD_REQUEST)
             sourceStoreInventory.save()
 
             # Se crear el inventario en el almacen destino.
