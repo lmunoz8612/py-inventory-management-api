@@ -8,6 +8,21 @@ class ProductSerializer(serializers.Serializer):
     category = serializers.CharField(max_length = 100)
     price = serializers.FloatField()
     sku = serializers.CharField(max_length = 50)
+    def validate_sku(self, value):
+        query = Product.objects.filter(sku=value)
+
+        # Si es actualización, excluye el objeto actual
+        if self.instance:
+            query = query.exclude(pk=self.instance.pk)
+
+        # Evalúa si la consulta devolvió al menos un elemento sin usar .exists()
+        if query.count() > 0:
+            raise serializers.ValidationError({
+                "detail": "A product with this SKU already exists.",
+                "code": "sku_already_exists"
+            })
+
+        return value
 
     def create(self, validated_data):
         product = Product(**validated_data)
