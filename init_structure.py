@@ -6,10 +6,7 @@ import os
 load_dotenv()
 
 # Conexión a MongoDB
-connect(
-    db = os.getenv("MONGO_DBNAME"),
-    host = os.getenv("MONGO_DBHOST")
-)
+connect(db=os.getenv("MONGO_DBNAME"), host=os.getenv("MONGO_DBHOST"))
 
 from init_models import Product, Store, Inventory, InventoryTransfer
 

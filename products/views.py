@@ -5,91 +5,103 @@ from .models import Product
 from inventory.models import Inventory
 from .serializers import ProductSerializer
 
+
 class ProductViewSet(viewsets.ViewSet):
     @swagger_auto_schema(
-        operation_summary = 'List all products',
-        responses = { 200: ProductSerializer(many = True) }
+        operation_summary="List all products",
+        responses={200: ProductSerializer(many=True)},
     )
     def list(self, request):
         products = Product.objects.all()
 
-        category = request.query_params.get('category')
-        price = request.query_params.get('price')
-        sku = request.query_params.get('sku')
+        category = request.query_params.get("category")
+        price = request.query_params.get("price")
+        sku = request.query_params.get("sku")
 
         if category:
-            products = products.filter(category__iexact = category)
+            products = products.filter(category__iexact=category)
         if price:
             try:
-                products = products.filter(price = float(price))
+                products = products.filter(price=float(price))
             except ValueError:
-                return Response({'error': 'Invalid price.'}, status = status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"error": "Invalid price."}, status=status.HTTP_400_BAD_REQUEST
+                )
         if sku:
             try:
-                products = products.filter(sku = sku)
+                products = products.filter(sku=sku)
             except ValueError:
-                return Response({'error': 'Invalid sku.'}, status = status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"error": "Invalid sku."}, status=status.HTTP_400_BAD_REQUEST
+                )
 
-        serializer = ProductSerializer(products, many = True)
+        serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
     @swagger_auto_schema(
-        operation_summary = 'Register a new product',
-        request_body = ProductSerializer,
-        responses = { 201: ProductSerializer(many = True) }
+        operation_summary="Register a new product",
+        request_body=ProductSerializer,
+        responses={201: ProductSerializer(many=True)},
     )
     def create(self, request):
-        serializer = ProductSerializer(data = request.data)
+        serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
-        operation_summary = 'Update an existing product',
-        request_body = ProductSerializer,
-        responses = { 200: ProductSerializer(many = True) }
+        operation_summary="Update an existing product",
+        request_body=ProductSerializer,
+        responses={200: ProductSerializer(many=True)},
     )
-    def update(self, request, pk = None):
+    def update(self, request, pk=None):
         try:
-            product = Product.objects.get(pk = pk)
+            product = Product.objects.get(pk=pk)
         except Product.DoesNotExist:
-            return Response({'error': 'Product not found.'}, status = status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"error": "Product not found."}, status=status.HTTP_404_NOT_FOUND
+            )
 
-        serializer = ProductSerializer(product, data = request.data)
+        serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
-        operation_summary = 'Retrieve product',
-        responses = { 200: ProductSerializer(many = True) }
+        operation_summary="Retrieve product",
+        responses={200: ProductSerializer(many=True)},
     )
-    def retrieve(self, request, pk = None):
+    def retrieve(self, request, pk=None):
         try:
-            product = Product.objects.get(pk = pk)
+            product = Product.objects.get(pk=pk)
         except Product.DoesNotExist:
-            return Response({'error': 'Product not found.'}, status = status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"error": "Product not found."}, status=status.HTTP_404_NOT_FOUND
+            )
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
     @swagger_auto_schema(
-        operation_summary = 'Delete an existing product',
-        responses = {
-            204: 'Product successfully deleted.',
-            404: 'Product not found.'
-        }
+        operation_summary="Delete an existing product",
+        responses={204: "Product successfully deleted.", 404: "Product not found."},
     )
-    def destroy(self, request, pk = None):
+    def destroy(self, request, pk=None):
         try:
-            product = Product.objects.get(pk = pk)
+            product = Product.objects.get(pk=pk)
         except Product.DoesNotExist:
-            return Response({'error': 'Product not found.'}, status = status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"error": "Product not found."}, status=status.HTTP_404_NOT_FOUND
+            )
 
-        # Validar si el producto no existe en inventario, de lo contrario, devolver un error.
-        inventoryEntry = Inventory.objects.filter(productId = str(product.id)).first()
+        inventoryEntry = Inventory.objects.filter(productId=str(product.id)).first()
         if inventoryEntry:
-            return Response({ 'error' : 'Product exists in inventory and cannot be deleted.' }, status = status.HTTP_409_CONFLICT)
+            return Response(
+                {"error": "Product exists in inventory and cannot be deleted."},
+                status=status.HTTP_409_CONFLICT,
+            )
         product.delete()
-        return Response({'message': 'Product successfully deleted.'}, status = status.HTTP_200_OK)
+        return Response(
+            {"message": "Product successfully deleted."}, status=status.HTTP_200_OK
+        )
